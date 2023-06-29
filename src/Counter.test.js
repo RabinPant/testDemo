@@ -1,7 +1,5 @@
 import React from "react";
-
 import { fireEvent, render, screen } from "@testing-library/react";
-
 import Counter from "./counter";
 
 test("Initial value of counter should be 0", () => {
@@ -17,4 +15,20 @@ test("On Click, it should increment counter by 1", () => {
   expect(counterEl.textContent).toBe("0");
   fireEvent.click(btnEl);
   expect(counterEl.textContent).toBe("1");
+});
+
+test("Input should have 10 as initial value", () => {
+  render(<Counter />);
+  const inputEl = screen.getByTestId("input");
+  expect(inputEl.value).toBe("10");
+});
+
+test("Entering value in the input works", () => {
+  render(<Counter />);
+  const inputEl = screen.getByTestId("input");
+  fireEvent.change(inputEl, {
+    target: {
+      value: 11,
+    },
+  });
 });
